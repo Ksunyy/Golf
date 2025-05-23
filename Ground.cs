@@ -95,20 +95,20 @@ namespace GolfGame
         {
             shader.Use();
 
-            // Установка матриц
+            // Указываем, что используем текстуру
+            shader.SetBool("useTexture", true);
+
+            // Остальной код остается без изменений
             Matrix4 model = Matrix4.Identity;
             shader.SetMatrix4("model", model);
 
-            // Привязка текстуры
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, textureID);
             shader.SetInt("texture0", 0);
 
-            // Отрисовка
             GL.BindVertexArray(VAO);
             GL.DrawArrays(PrimitiveType.TriangleFan, 0, 4);
 
-            // Очистка
             GL.BindVertexArray(0);
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }

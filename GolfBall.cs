@@ -22,7 +22,7 @@ namespace GolfGame
         private const float RollingFriction = 0.96f; // Трение при качении
         private bool _isInFlight = false;
 
-        private const float Gravity = -9.8f; // Реалистичная гравитация (м/с?)
+        private const float Gravity = -9.8f; // Реалистичная гравитация 
         private const float GroundBounce = 0.6f; // Коэффициент отскока от земли
         private const float GroundFriction = 0.98f; // Трение о землю
         private const float AirResistance = 0.999f; // Сопротивление воздуха
@@ -162,7 +162,11 @@ namespace GolfGame
         {
             Matrix4 model = Matrix4.CreateTranslation(Position);
             shader.SetMatrix4("model", model);
-            shader.SetColor4("objectColor", Color4.White);
+
+            // Указываем, что не используем текстуру
+            shader.SetBool("useTexture", false);
+            // Устанавливаем белый цвет
+            shader.SetColor4("objectColor", new Color4(1.0f, 1.0f, 1.0f, 1.0f));
 
             GL.BindVertexArray(VAO);
             GL.DrawElements(PrimitiveType.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0);

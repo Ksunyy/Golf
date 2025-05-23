@@ -67,6 +67,11 @@ namespace GolfGame
         {
             GL.UseProgram(_handle);
         }
+        public void SetBool(string name, bool value)
+        {
+            int location = GL.GetUniformLocation(_handle, name);
+            GL.Uniform1(location, value ? 1 : 0);
+        }
         public void SetInt(string name, int value)
         {
             int location = GL.GetUniformLocation(_handle, name);
@@ -252,7 +257,10 @@ namespace GolfGame
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
+            GL.ClearColor(0.2f, 0.35f, 0.75f, 1.0f); // Красивый синий цвет
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+
 
             shader.Use();
             shader.SetMatrix4("view", camera.GetViewMatrix());
